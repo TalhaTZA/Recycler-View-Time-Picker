@@ -41,11 +41,11 @@ class MainActivity : AppCompatActivity() {
                         //Log.e("check","${(layoutManager as LinearLayoutManager).findFirstCompletelyVisibleItemPosition()}")
 
                         val lm = layoutManager as LinearLayoutManager
-                        var position = lm.findFirstCompletelyVisibleItemPosition()
+                        var position = lm.findLastCompletelyVisibleItemPosition()
 
-                        if (position == 0) {
-                            position = 1
-                        }
+//                        if (position == 0) {
+//                            position = 1
+//                        }
 
                         //if (mLastPosition != position) {
                         //Log.e("check", "$mLastPosition  $position")
