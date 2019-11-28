@@ -29,7 +29,7 @@ class TimePickerAdapter(
 
             for (i in 0..23) {
                 for (j in 0..3) {
-                    var time = "$i:${minute[j]}"
+                    val time = "$i:${minute[j]}"
 
                     list.add(time)
                 }
@@ -46,11 +46,14 @@ class TimePickerAdapter(
 
     }
 
-    override fun getItemCount(): Int = list.size
+    override fun getItemCount(): Int = Integer.MAX_VALUE
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(list[position],display)
+        //Log.e("check", "${position % list.size}")
+        holder.bind(list[position % list.size], display)
     }
+
+
 }
 
 
@@ -73,11 +76,11 @@ class ViewHolder private constructor(private val itemViewBinding: RecyclerItemVi
 
     }
 
-    fun bind(s: String,display: DisplayMetrics) {
-        itemViewBinding.txtViewTime.layoutParams.width = (display.widthPixels / 3)
-        Log.e("check","${display.widthPixels}")
+    fun bind(s: String, display: DisplayMetrics) {
+        itemViewBinding.txtViewTime.layoutParams.width = ((display.widthPixels / 3) - 32)
         itemViewBinding.time = s
         itemViewBinding.executePendingBindings()
     }
+
 
 }
