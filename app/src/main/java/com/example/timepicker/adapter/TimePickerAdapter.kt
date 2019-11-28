@@ -1,14 +1,18 @@
 package com.example.timepicker.adapter
 
+import android.util.DisplayMetrics
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.timepicker.R
 import com.example.timepicker.databinding.RecyclerItemViewTimePickerBinding
 import kotlinx.coroutines.*
 
 
-class TimePickerAdapter(val list: ArrayList<String>) : RecyclerView.Adapter<ViewHolder>() {
+class TimePickerAdapter(
+    val list: ArrayList<String>,
+    val display: DisplayMetrics
+) : RecyclerView.Adapter<ViewHolder>() {
 
 
     val job = Job()
@@ -39,12 +43,13 @@ class TimePickerAdapter(val list: ArrayList<String>) : RecyclerView.Adapter<View
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.from(parent)
+
     }
 
     override fun getItemCount(): Int = list.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(list[position])
+        holder.bind(list[position],display)
     }
 }
 
@@ -68,7 +73,9 @@ class ViewHolder private constructor(private val itemViewBinding: RecyclerItemVi
 
     }
 
-    fun bind(s: String) {
+    fun bind(s: String,display: DisplayMetrics) {
+        itemViewBinding.txtViewTime.layoutParams.width = (display.widthPixels / 3)
+        Log.e("check","${display.widthPixels}")
         itemViewBinding.time = s
         itemViewBinding.executePendingBindings()
     }

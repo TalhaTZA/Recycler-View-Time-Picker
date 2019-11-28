@@ -2,6 +2,7 @@ package com.example.timepicker
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.DisplayMetrics
 import androidx.databinding.DataBindingUtil
 import com.example.timepicker.adapter.TimePickerAdapter
 import com.example.timepicker.databinding.ActivityMainBinding
@@ -36,7 +37,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun callAdapters() {
 
-        mAdapter = TimePickerAdapter(arrayListOf())
+        val display = DisplayMetrics()
+        windowManager.defaultDisplay.getMetrics(display)
+        mAdapter = TimePickerAdapter(arrayListOf(),display)
+
     }
 
 
